@@ -3,14 +3,18 @@ package vending;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class VendingMachineTest {
+import day14.Ex06;
+
+public class VendingMachineTest extends day14.Ex06 {
 	Scanner scan = new Scanner(System.in);
 	Beverage bvg = new Beverage();
 	private String menu;
 	private int price;
+
 	
 	public void print() { // 메인 화면 출력
 		String password = "1234";
+		//timePrint(); // Ex06의 시간 출력
 		
 		while(true) {
 			System.out.println("===== 자판기 프로그램 =====");
@@ -138,7 +142,6 @@ public class VendingMachineTest {
 	//고객용 화면 출력
 	public void customerPrint() {
 		int money = 0;
-		Iterator it = bvg.menumap.keySet().iterator();
 		
 		while(true) {
 			System.out.println("===== 자판기 =====");
@@ -159,6 +162,7 @@ public class VendingMachineTest {
 					System.out.println("관리자에게 문의하세요.");
 				}else if(!bvg.menumap.isEmpty()) {
 					System.out.println("===== MENU =====");
+					Iterator it = bvg.menumap.keySet().iterator();
 					while(it.hasNext()) {
 						String itmenu = (String)it.next();
 						System.out.println(itmenu + " " + bvg.menumap.get(itmenu) + "원");
@@ -171,10 +175,11 @@ public class VendingMachineTest {
 					System.out.print(">>> ");
 					String menu = scan.next();
 					
-					int price = (int)bvg.menumap.get(menu);
+					
 					if(bvg.menumap.containsKey(menu)==false) {
 						System.out.println("없는 메뉴입니다.");
 					}else if(bvg.menumap.containsKey(menu)) {
+						int price = (int)bvg.menumap.get(menu);
 						System.out.println("선택하신 메뉴는 " + menu + "입니다.");
 						System.out.println("가격은 " + price + "원입니다.");
 						System.out.println("구매 하시겠습니까?");
